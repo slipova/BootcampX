@@ -41,7 +41,7 @@ pool.query(`
   GROUP BY students.id, cohorts.name
   HAVING cohorts.name LIKE $1
   LIMIT $2;
-  `)
+  `, [process.argv[2], process.argv[3]])
   .then(res => {
     res.rows.forEach((user) => {
       console.log(`${user.name} has an id of ${user.id} and was in the ${user.cohort_name} cohort`);

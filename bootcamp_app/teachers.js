@@ -37,7 +37,7 @@ pool.query(
   
   GROUP BY teachers.name, cohorts.name
   ORDER BY teachers.name
-  `)
+  `, [process.argv[2]])
   .then(res => {
     res.rows.forEach((row) => {
       console.log(`${row.cohort}: ${row.name}`)
