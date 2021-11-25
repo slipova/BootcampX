@@ -1,6 +1,4 @@
 const { Pool } = require('pg');
-const cohortInput = process.argv[2];
-const limitInput = process.argv[3];
 
 const pool = new Pool({
   user: 'vagrant',
@@ -41,8 +39,8 @@ pool.query(`
   FROM students
   JOIN cohorts ON cohorts.id = cohort_id
   GROUP BY students.id, cohorts.name
-  HAVING cohorts.name LIKE '${cohortInput}%'
-  LIMIT ${limitInput};
+  HAVING cohorts.name LIKE $1
+  LIMIT $2;
   `)
   .then(res => {
     res.rows.forEach((user) => {
